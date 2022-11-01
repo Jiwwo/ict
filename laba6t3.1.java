@@ -1,4 +1,3 @@
-import java.util.Scanner;
 import static java.lang.Math.*;
 
 public class oliver3 {
