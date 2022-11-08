@@ -16,13 +16,14 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = 0;
+        double sum = 0;
         while (n < 10){
             System.out.println("input y");
             double y = sc.nextDouble();
-            System.out.println(FunctionMy.FunctionMy1(y));
-            System.out.println(FunctionMy.FunctionMy2(y));
-            System.out.println("Continue?");
+            sum += FunctionMy.FunctionMy1(y) + FunctionMy.FunctionMy2(y);
             n++;
         }
+        System.out.println(sum);
     }
 }
+//как а главное зачем делать "взаимодействие с классом FunctionMy сделать в виде наследования." ?
