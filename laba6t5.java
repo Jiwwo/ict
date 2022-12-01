@@ -8,9 +8,9 @@ public class Main {
         double ep3 = 0.01;
         Scanner sc = new Scanner(System.in);
         double x = sc.nextDouble();
-        System.out.println("xuy1 = " + summa(ep1,x));
-        System.out.println("xuy2 = " + summa(ep2,x));
-        System.out.println("xuy3 = " + summa(ep3,x));
+        System.out.println("ep1 = " + summa(ep1,x));
+        System.out.println("ep2 = " + summa(ep2,x));
+        System.out.println("ep3 = " + summa(ep3,x));
     }
     public static double summa(double ep,double x){
         double s = 0;
