@@ -1,23 +1,29 @@
-import static java.lang.Math.*;
 import java.util.Scanner;
 
-public class Main {
+public class oliver1 {
     public static void main(String[] args) {
-        double ep1 = 0.01; double ep2 = 0.001; double ep3 = 0.0001; double ep4 = 0.00001; double ep5 = 0.000001; int n = 0;
-        Scanner sc = new Scanner(System.in);
-        double x = sc.nextDouble();
-        double p = sc.nextDouble();
-        double y0 = exp(log(x*(p+1))/p)*0.9;
-        hueta(ep1, x, y0, p, n);
-        hueta(ep2, x, y0, p, n);
-        hueta(ep3, x, y0, p, n);
-        hueta(ep4, x, y0, p, n);
-        hueta(ep5, x, y0, p, n);
-    }
-    public static void hueta(double ep,double x,double y,double p,double n){
-        double y_i = 1/p*((p - 1)*y+x/pow(y, p - 1));
-        n++;
-        if (abs(y_i - y) > ep) hueta(ep, x, y_i, p, n);
-        else System.out.println(ep + ", " + (y_i) + ", " + n);
+        Scanner in=new Scanner(System.in);
+        double y0;
+        System.out.println("input p");
+        double p = in.nextDouble();
+        System.out.println("input x");
+        double x = in.nextDouble();
+        System.out.println("input y0");
+        while ((y0 = in.nextDouble())>= Math.exp(Math.log((x*(p+1)))/p)){
+            System.out.println("wrong");
+        }
+        int n = 0;
+        double y;
+        for (double ep = 0.000001; ep <= 0.01; ep/=0.1){
+            y = 0;
+            while (Math.abs(y - y0) > ep){
+                y = (1/p)*((p - 1)*y0+(x/Math.pow(y0, p - 1)));
+                y0 = y;
+                n++;
+            }
+            if (Math.abs(y - y0)<=ep){
+                System.out.println("Точность " + ep + " Корень  " + y + " Число итераций  " + n);
+            }
+        }
     }
 }
