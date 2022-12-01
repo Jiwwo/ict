@@ -1,14 +1,14 @@
 public class oliver1 {
     public static void main(String[] args){
         String[][] table = tableArray(9, 9);
-        String tableF = new String();
+        StringBuilder tableF = new StringBuilder();
 
         for (int line = 0; line < table.length; line++){
             for (int column = 0; column < table[line].length; column++){
-                tableF += ((line + 1) + " + " + (column + 1) + " = " + table[line][column] + "\t");
+                tableF.append(line + 1).append(" + ").append(column + 1).append(" = ").append(table[line][column]).append("\t");
             }
             System.out.println(tableF);
-            tableF = "";
+            tableF = new StringBuilder();
         }
     }
 
