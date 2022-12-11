@@ -20,8 +20,6 @@ public class Main {
                 arr[j][i] = k;
                 k++;
             }
-            PrintOut(arr);
-            System.out.println();
         }
         PrintOut(arr);
     }
