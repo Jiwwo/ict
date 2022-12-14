@@ -17,18 +17,11 @@ public class Main {
         for (int lp = 0,c = x; lp < m; lp++,c++){
             for (int i = y + lp; i < m - lp; i++){
                 arr[i][c] = k++;
-                PrintArr(arr);
-                System.out.println("======================== 1");
             }
             for (int l = m - 3 * lp, b = x + 2 * lp; l >= y + lp; l--, b++){
                 arr[l][b] = k++;
-                PrintArr(arr);
-                System.out.println("======================== 2");
             }
             for (int h = end_x - 3 * lp - 1,h1 = y + lp; h >= x + 1 ; h--){
-                arr[h1][h] = k++;
-                PrintArr(arr);
-                System.out.println("======================== 3");
             }
         }
     }
@@ -41,4 +34,4 @@ public class Main {
         }
     }
 }
-//test varik
+//test / fix 1 loop 
