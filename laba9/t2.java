@@ -6,17 +6,17 @@ public class class_c1 {
         String str;
         boolean input = false;
         do {
-            System.out.print("Введите число в троичной системе счисления: ");
+            System.out.print("input num");
             str = in.nextLine();
             input = str.matches("[012]+");
             if (!input) {
-                System.out.println("Число введено неверно. Попробуйте еще раз.");
+                System.out.println("wrong num try again");
             }
         } while (!input);
 
-        int inputNumber = Integer.parseInt(str, 3);
-        String outputString = Integer.toString(inputNumber, 5);
+        int numIn = Integer.parseInt(str, 3);
+        String strOut = Integer.toString(numIn, 5);
 
-        System.out.println("Число в пятеричной системе счисления: " + outputString);
+        System.out.println(strOut);
     }
 }
