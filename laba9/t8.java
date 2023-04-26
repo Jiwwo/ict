@@ -17,7 +17,7 @@ class class_c1{
             }
         }
         if (result.isEmpty()) {
-            result = "Не найдено двух предложений с общими словами.";
+            result = "No sentences with similar words.";
         }
         System.out.println(result);
     }
