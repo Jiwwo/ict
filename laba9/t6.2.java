@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class class_c11 {
+public class class_c1 {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         System.out.print("input n ");
