@@ -9,14 +9,14 @@ public class coordinates {
         int n = 10;
         BufferedWriter fwr = new BufferedWriter(new FileWriter(file));
         for (int i = 0; i < n; i++) {
-            String ground = generateRandomPlotCoordinates();
+            String ground = getCoordinates();
             fwr.write(ground);
             fwr.newLine();
         }
         fwr.flush();
         fwr.close();
     }
-    private static String generateRandomPlotCoordinates() {
+    private static String getCoordinates() {
         Random random = new Random();
         StringBuilder coordinates = new StringBuilder();
         for (int i = 0; i < 4; i++) {
