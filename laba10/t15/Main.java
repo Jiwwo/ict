@@ -43,6 +43,7 @@ public class Main {
             fwr.flush();
             fwr.close();
     }
+    }
     private static List<String> load(String fileName) throws IOException{
         List<String> data = new ArrayList<>();
         BufferedReader rd = new BufferedReader(new FileReader(fileName));
