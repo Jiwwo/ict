@@ -31,3 +31,4 @@ public class infostructure {
         return data.toString();
     }
 }
+
