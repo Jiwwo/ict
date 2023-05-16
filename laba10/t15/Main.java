@@ -39,11 +39,11 @@ public class Main {
             }
             fwr.write(String.format("%d\t%.2f\t%d\t%.2f\t%.2f", i + 1, ground.getArea(), cnt, lakeArea, groundArea));
             fwr.newLine();
-            }
-            fwr.flush();
-            fwr.close();
+        }
+        fwr.flush();
+        fwr.close();
     }
-    }
+
     private static List<String> load(String fileName) throws IOException{
         List<String> data = new ArrayList<>();
         BufferedReader rd = new BufferedReader(new FileReader(fileName));
