@@ -5,7 +5,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-
 public class Main {
     public static void main(String[] args) throws IOException {
         File file = new File("C:\\Users\\ivanx\\OneDrive\\Рабочий стол\\t1.txt");
