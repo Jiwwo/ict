@@ -1,0 +1,1 @@
+txt // one string coment ; /* multi string coment */ /** documentary coment */   
