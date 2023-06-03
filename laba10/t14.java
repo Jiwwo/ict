@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws IOException{
-        String filename = "C:\\Users\\allan\\OneDrive\\Рабочий стол\\Variant_1,11.txt";
+        String filename = "C:\\Users\\ivanx\\OneDrive\\Рабочий стол\\Variant_1,11.txt";
         List<List<Double>> data = new ArrayList<>();
         BufferedReader fread = new BufferedReader(new FileReader(filename));
         String line;
