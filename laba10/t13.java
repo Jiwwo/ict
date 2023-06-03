@@ -1,87 +1,120 @@
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        String out = "C:\\Users\\ivanx\\OneDrive\\Рабочий стол\\t133.txt";
-        List<double[][]> f1 = readM("C:\\Users\\ivanx\\OneDrive\\Рабочий стол\\t131.txt");
-        List<double[]> f2 = readSLAU("C:\\Users\\ivanx\\OneDrive\\Рабочий стол\\t132.txt");
-        List<double[]> corrected = new ArrayList<>();
-        for (int i = 0; i < f1.size(); i++) {
-            double[][] array = f1.get(i);
-            double[] array1 = f2.get(i);
-            double[] array2 = check(array, array1);
-            corrected.add(array2);
+        String inputFile1 = "C:\\Users\\allan\\OneDrive\\Рабочий стол\\t131.txt";
+        String inputFile2 = "C:\\Users\\allan\\OneDrive\\Рабочий стол\\t132.txt";
+        String outputFile = "C:\\Users\\allan\\OneDrive\\Рабочий стол\\t133.txt";
+        double[][][] matrices = Matrix(inputFile1);
+        double[][] solutions = Solutions(inputFile2);
+        double[][] correctedSolutions = new double[solutions.length][];
+        for (int i = 0; i < matrices.length; i++) {
+            double[][] matrix = matrices[i];
+            double[] solution = solutions[i];
+            double[] freeTerms = getFreeTerms(matrix);
+            if (check(matrix, solution, freeTerms)) {
+                correctedSolutions[i] = solution;
+            } else {
+                correctedSolutions[i] = solveGauss(matrix);
+            }
         }
-        write(out, corrected);
+        writeSolutions(outputFile, correctedSolutions);
     }
-    private static List<double[][]> readM(String file) throws IOException {
-        List<double[][]> array1 = new ArrayList<>();
-        List<String> line = Files.readAllLines(Paths.get(file));
-        int n = Integer.parseInt(line.get(0));
-        line.remove(0);
-        while (!line.isEmpty()) {
+
+    public static double[][][] Matrix(String fileName) throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(fileName));
+        int k = Integer.parseInt(reader.readLine());
+        double[][][] matrices = new double[k][][];
+        for (int i = 0; i < k; i++) {
+            int n = Integer.parseInt(reader.readLine());
             double[][] matrix = new double[n][n + 1];
-            for (int i = 0; i < n; i++) {
-                String[] value = line.get(0).split(" ");
-                for (int j = 0; j < n + 1; j++) {
-                    matrix[i][j] = Double.parseDouble(value[j]);
+            for (int j = 0; j < n; j++) {
+                String[] line = reader.readLine().split(" ");
+                for (int m = 0; m < n + 1; m++) {
+                    matrix[j][m] = Double.parseDouble(line[m]);
                 }
-                line.remove(0);
             }
-            array1.add(matrix);
+            matrices[i] = matrix;
         }
-        return array1;
+        return matrices;
     }
-    private static List<double[]> readSLAU(String file) throws IOException {
-        List<double[]> arrayS = new ArrayList<>();
-        List<String> line = Files.readAllLines(Paths.get(file));
-        while (!line.isEmpty()) {
-            String[] values = line.get(0).split(" ");
-            double[] s = new double[values.length];
-            for (int i = 0; i < values.length; i++) {
-                s[i] = Double.parseDouble(values[i]);
+
+    public static double[][] Solutions(String fileName) throws IOException {
+        return Files.lines(Paths.get(fileName))
+                .map(line -> Arrays.stream(line.split(" "))
+                        .mapToDouble(Double::parseDouble)
+                        .toArray())
+                .toArray(double[][]::new);
+    }
+
+    public static void writeSolutions(String fileName, double[][] solutions) throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
+        for (double[] solution : solutions) {
+            for (int i = 0; i < solution.length; i++) {
+                writer.write(Double.toString(solution[i]));
+                if (i < solution.length - 1) {
+                    writer.write(" ");
+                }
             }
-            arrayS.add(s);
-            line.remove(0);
+            writer.newLine();
         }
-        return arrayS;
     }
-    private static double[] check(double[][] array, double[] array1) {
-        int n = array.length;
-        double[] res = new double[n];
+
+    public static double[] getFreeTerms(double[][] matrix) {
+        return Arrays.stream(matrix)
+                .mapToDouble(row -> row[row.length - 1])
+                .toArray();
+    }
+
+    public static boolean check(double[][] matrix, double[] solution, double[] freeTerms) {
+        int n = matrix.length;
+        double epsilon = 1e-6;
         for (int i = 0; i < n; i++) {
             double sum = 0;
             for (int j = 0; j < n; j++) {
-                sum += array[i][j] * array1[j];
+                sum += matrix[i][j] * solution[j];
             }
-            res[i] = sum;
-        }
-        boolean f = true;
-        for (int i = 0; i < n; i++) {
-            if (Math.abs(res[i] - array[i][n]) > 1e-6) {
-                f = false;
-                break;
+            if (Math.abs(sum - freeTerms[i]) > epsilon) {
+                return false;
             }
         }
-        return f ? array1 : res;
+        return true;
     }
-    private static void write(String file, List<double[]> resh) throws IOException {
-        try (BufferedWriter fwr = new BufferedWriter(new FileWriter(file))) {
-            for (double[] array1 : resh) {
-                for (int i = 0; i < array1.length; i++) {
-                    fwr.write(Double.toString(array1[i]));
-                    if (i < array1.length - 1) {
-                        fwr.write(" ");
-                    }
+
+    public static double[] solveGauss(double[][] matrix) {
+        int n = matrix.length;
+        double[] solution = new double[n];
+        for (int i = 0; i < n; i++) {
+            int maxRow = i;
+            for (int j = i + 1; j < n; j++) {
+                if (Math.abs(matrix[j][i]) > Math.abs(matrix[maxRow][i])) {
+                    maxRow = j;
                 }
-                fwr.newLine();
+            }
+            double[] temp = matrix[i];
+            matrix[i] = matrix[maxRow];
+            matrix[maxRow] = temp;
+            for (int j = i + 1; j < n; j++) {
+                double factor = matrix[j][i] / matrix[i][i];
+                for (int k = i; k < n + 1; k++) {
+                    matrix[j][k] -= factor * matrix[i][k];
+                }
             }
         }
+        for (int i = n - 1; i >= 0; i--) {
+            double sum = 0;
+            for (int j = i + 1; j < n; j++) {
+                sum += matrix[i][j] * solution[j];
+            }
+            solution[i] = (matrix[i][n] - sum) / matrix[i][i];
+        }
+        return solution;
     }
 }
