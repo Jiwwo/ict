@@ -3,7 +3,7 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        File file = new File("C:\\Users\\allan\\OneDrive\\Рабочий стол\\t9.txt");
+        File file = new File("C:\\Users\\ivanx\\OneDrive\\Рабочий стол\\t9.txt");
         FileWriter fwr = new FileWriter(file, true);
         BufferedReader fread = new BufferedReader(new FileReader(file));
         int c = 2;
