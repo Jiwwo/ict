@@ -37,7 +37,7 @@ public class Main {
                     }
                 }
             }
-            fwr.write(String.format("%d\t%.2f\t%d\t%.2f\t%.2f", i + 1, ground.getArea(), cnt, lakeArea, groundArea));
+            fwr.write(String.format("%d\t\t%.2f\t\t%d\t\t%.2f\t\t\t\t\t%.2f", i + 1, ground.getArea(), cnt, lakeArea, groundArea));
             fwr.newLine();
         }
         fwr.flush();
@@ -66,7 +66,7 @@ public class Main {
     }
 }
 
-class square { // эта мразь отняла у меня 2 часа времени 
+class square {
     private int[] x1;
     private int[] y1;
 
