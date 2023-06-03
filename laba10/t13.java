@@ -9,9 +9,9 @@ import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        String inputFile1 = "C:\\Users\\allan\\OneDrive\\Рабочий стол\\t131.txt";
-        String inputFile2 = "C:\\Users\\allan\\OneDrive\\Рабочий стол\\t132.txt";
-        String outputFile = "C:\\Users\\allan\\OneDrive\\Рабочий стол\\t133.txt";
+        String inputFile1 = "C:\\Users\\ivanx\\OneDrive\\Рабочий стол\\t131.txt";
+        String inputFile2 = "C:\\Users\\ivanx\\OneDrive\\Рабочий стол\\t132.txt";
+        String outputFile = "C:\\Users\\ivanx\\OneDrive\\Рабочий стол\\t133.txt";
         double[][][] matrices = Matrix(inputFile1);
         double[][] solutions = Solutions(inputFile2);
         double[][] correctedSolutions = new double[solutions.length][];
