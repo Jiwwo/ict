@@ -2,9 +2,9 @@ import java.io.*;
 import java.text.DecimalFormat;
 import static java.lang.Math.*;
 
-public class Main { //fix for 11 var ? idk haven't seen uir 
+public class Main {
     public static void main(String[] args) throws IOException {
-        File file = new File("C:\\Users\\Дарья\\Desktop\\text11.txt");
+        File file = new File("C:\\Users\\ivanx\\OneDrive\\Рабочий стол\\t11.txt");
         FileWriter fwr = new FileWriter(file);
         DecimalFormat dec = new DecimalFormat("#.#");
         fwr.write("Формула z = x^3*sin(y^2) + x^2*y^3,\n" +
